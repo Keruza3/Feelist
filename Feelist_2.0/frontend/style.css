@@ -1,0 +1,68 @@
+/* Fondo animado */
+body {
+  background: linear-gradient(135deg, #0d0d0d, #1a0033, #000033);
+  background-size: 400% 400%;
+  animation: pulseBG 15s ease infinite;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Animación del fondo */
+@keyframes pulseBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Logo */
+.logo {
+  max-width: 280px;
+}
+
+/* Formulario */
+.chat-form {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feelist-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+
+/* Caja de respuesta */
+.response-box {
+  width: 100%;
+  max-width: 600px;
+  min-height: 100px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Footer */
+.footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #bbb;
+  opacity: 0.7;
+}
+
+/* Placeholder input */
+#user-input::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
