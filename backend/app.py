@@ -13,8 +13,10 @@ CORS(app)
 load_dotenv()
 
 # Ruta principal de la API
-@app.route('/api/monday', methods=['POST'])
-def monday():
+@app.route('/')
+def home():
+    return 'Feelist API corriendo. Mandá un POST a /api/monday.'
+
     # Inicializar cliente OpenAI con la API Key
     cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
