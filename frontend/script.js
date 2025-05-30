@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const datos = await respuesta.json();
       const { mood, quote, tracks } = datos;
 
+      if (!tracks || !Array.isArray(tracks)) {
+        contenedorRespuesta.innerText = "Monday se rompió emocionalmente. Intentalo de nuevo.";
+        return;
+      }
+
       contenedorRespuesta.innerHTML = `
         <div class="respuesta-container">
           <h5 class="respuesta-titulo">Mood detectado:</h5>
