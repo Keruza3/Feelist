@@ -12,18 +12,19 @@ CORS(app)
 # Cargar variables del archivo .env
 load_dotenv()
 
-# Ruta principal de la API
+# Ruta principal para probar si está viva la API
 @app.route('/')
 def home():
     return 'Feelist API corriendo. Mandá un POST a /api/monday.'
 
-    # Inicializar cliente OpenAI con la API Key
+# Ruta POST principal
+@app.route('/api/monday', methods=['POST'])
+def monday():
     cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     datos_recibidos = request.get_json()
     print("Mensaje recibido:", datos_recibidos)
 
-    # Petición al modelo de OpenAI
     respuesta = cliente.chat.completions.create(
         model=os.getenv("GPT_MODEL"),
         temperature=0.7,
@@ -47,7 +48,6 @@ def home():
         max_tokens=400
     )
 
-    # Parsear respuesta del modelo
     contenido = respuesta.choices[0].message.content
     json_parseado = json.loads(contenido)
     print("Respuesta enviada")
@@ -57,6 +57,8 @@ def home():
         content_type="application/json; charset=utf-8"
     )
 
+# Ejecutar servidor
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=True)
+
 
