@@ -3,7 +3,7 @@ import json
 from dotenv import load_dotenv
 from openai import OpenAI
 from flask import Flask, request, make_response
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 # Inicializar Flask
 app = Flask(__name__)
@@ -21,6 +21,7 @@ def home():
 
 # Ruta principal que procesa la entrada del usuario
 @app.route('/api/monday', methods=['POST'])
+@cross_origin(origin='https://feelist-5d2ltpug5-kerus-projects-11fb7bb5.vercel.app')
 def monday():
     # Inicializar cliente de OpenAI
     cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
