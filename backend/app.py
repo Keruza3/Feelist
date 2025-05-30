@@ -7,7 +7,7 @@ from flask_cors import CORS
 
 # Inicializar Flask
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://feelist-5d2ltpug5-kerus-projects-11fb7bb5.vercel.app"])
 
 # Cargar variables del archivo .env
 load_dotenv()
