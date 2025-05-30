@@ -1,0 +1,134 @@
+/* Estilos globales */
+body {
+  background-color: #0c0d22; /* Fondo oscuro violeta */
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo principal */
+.logo {
+  max-width: 300px;
+  margin: 0 auto 2rem;
+  display: flex;
+  scale: 180%;
+}
+
+/* Contenedor del formulario */
+form {
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+/* Input de texto */
+input[type="text"],
+button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+}
+
+/* Botón de enviar */
+button {
+  background-color: #7a5df3; /* Violeta fuerte */
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Footer con firma */
+footer {
+  margin: 3rem 0 2rem 0;
+  color: #888;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Contenedor de logo + frase */
+.logo-frase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  width: 500px;
+  gap: 1.7rem;
+}
+
+/* Frase debajo del logo */
+.tagline {
+  font-size: 0.95rem;
+  color: #bbb;
+  text-align: center;
+  margin: 0;
+}
+
+/* Caja con la respuesta generada */
+#response-box {
+  max-width: 700px;
+  width: 100%;
+  margin: 3rem auto 2rem auto;
+  padding: 2.5rem;
+  background-color: #161626;
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(202, 104, 239, 0.2);
+  transition: all 0.4s ease;
+}
+
+
+/* Contenedor general de respuesta */
+.respuesta-container {
+  text-align: left;
+}
+
+/* Título de cada sección */
+.respuesta-titulo {
+  color: #7730e9;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Mood generado */
+.respuesta-mood {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #cda4ff;
+  margin-bottom: 1rem;
+}
+
+/* Frase de la IA */
+.respuesta-quote {
+  font-style: italic;
+  color: #bbbbbb;
+  border-left: 2px solid #c369e7;
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+/* Lista de canciones */
+.respuesta-lista {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+/* Ítem individual de la lista */
+.respuesta-item {
+  background-color: #1f1f2e;
+  color: #f2f2f2;
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.6rem;
+  border-radius: 8px;
+}

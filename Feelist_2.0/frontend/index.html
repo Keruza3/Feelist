@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feelist</title>
+
+  <!-- Estilos base de PicoCSS (font, forms ) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+
+  <!-- Tus propios estilos -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Sección con logo y frase -->
+  <div class="logo-frase"> 
+    <img src="img/logo-final.png" alt="Feelist logo" class="logo" />
+    <p class="tagline">IA emocionalmente inestable,<br>pero con buen gusto musical</p>
+  </div>
+
+  <!-- Formulario para ingresar el estado emocional -->
+  <form id="chat-form">
+    <input
+      type="text"
+      id="texto-usuario"
+      name="texto-usuario"
+      placeholder="Decime cómo te sentís (si te animás)"
+      required
+    />
+    <button type="submit">Enviar</button>
+  </form>
+
+  <!-- Contenedor donde se mostrará la respuesta de la IA -->
+  <div id="response-box" class="respuesta-container"></div>
+
+  <!-- Footer fijo abajo -->
+  <footer>
+    Powered by una IA con más drama que vos.
+  </footer>
+
+  <!-- Script para manejar eventos y fetch -->
+  <script src="script.js"></script>
+</body>
+</html>
