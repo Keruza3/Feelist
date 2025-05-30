@@ -40,9 +40,9 @@ def monday():
                     - "quote": una frase pseudo-poética que refleje ese estado
                     - "tracks": una lista de 3 canciones con título y artista
                     Respondé solo en JSON válido, sin explicaciones, sin texto adicional, sin encabezados.
+                    NO respondas nada fuera de un JSON válido. Si no entendés el input, igual devolvé un JSON de prueba.
                     """
-                },
-                {
+                },{
                     "role": "user",
                     "content": datos.get("text")
                 }
