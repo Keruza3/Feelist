@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contenedorRespuesta.innerText = "Procesando... probablemente contra mi voluntad.";
 
     try {
-      const res = await fetch('https://feelist.onrender.com/api/monday', {
+      const respuesta = await fetch('https://feelist.onrender.com/api/monday', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: mensajeUsuario })
@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
           </ul>
         </div>
       `;
-
     } catch (error) {
       contenedorRespuesta.innerText = "Error existencial. Monday no puede ayudarte ahora.";
       console.error(error);
