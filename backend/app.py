@@ -2,42 +2,31 @@ import os
 import json
 from dotenv import load_dotenv
 from openai import OpenAI
-from flask import Flask, request, make_response
-from flask_cors import CORS, cross_origin
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 # Inicializar Flask
 app = Flask(__name__)
 
-# Habilitar CORS para Vercel frontend
-CORS(app, origins=["https://feelist-5d2ltpug5-kerus-projects-11fb7bb5.vercel.app"])
+# Habilitar CORS solo para tu frontend de Vercel
+CORS(app, resources={r"/api/*": {"origins": "https://feelist-5d2ltpug5-kerus-projects-11fb7bb5.vercel.app"}})
 
-# Cargar variables de entorno del archivo .env
+# Cargar variables de entorno
 load_dotenv()
 
-# Ruta GET para verificar que la API esté viva
 @app.route('/')
 def home():
     return 'Feelist API corriendo. Mandá un POST a /api/monday.'
 
-# Ruta principal que procesa la entrada del usuario
 @app.route('/api/monday', methods=['POST'])
-@cross_origin(origin='https://feelist-5d2ltpug5-kerus-projects-11fb7bb5.vercel.app')
 def monday():
-    # Inicializar cliente de OpenAI
-    cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-    # Obtener datos JSON enviados por el usuario
-    datos_recibidos = request.get_json()
-    print("Mensaje recibido:", datos_recibidos)
-
-    # Validación mínima
-    if not datos_recibidos or "text" not in datos_recibidos:
-        respuesta_error = make_response(json.dumps({"error": "Falta el texto del usuario"}), 400)
-        respuesta_error.headers['Access-Control-Allow-Origin'] = 'https://feelist-5d2ltpug5-kerus-projects-11fb7bb5.vercel.app'
-        return respuesta_error
-
     try:
-        # Petición al modelo de OpenAI
+        cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        datos = request.get_json()
+
+        if not datos or "text" not in datos:
+            return jsonify({"error": "Falta el texto del usuario"}), 400
+
         respuesta = cliente.chat.completions.create(
             model=os.getenv("GPT_MODEL"),
             temperature=0.7,
@@ -55,29 +44,19 @@ def monday():
                 },
                 {
                     "role": "user",
-                    "content": datos_recibidos.get("text", "")
+                    "content": datos.get("text")
                 }
             ],
             max_tokens=400
         )
 
-        # Parsear respuesta de OpenAI
         contenido = respuesta.choices[0].message.content
-        json_parseado = json.loads(contenido)
-        print("Respuesta enviada:", json_parseado)
+        return jsonify(json.loads(contenido))
 
-        # Preparar respuesta con headers CORS
-        respuesta_ok = make_response(json.dumps(json_parseado, ensure_ascii=False))
-        respuesta_ok.headers['Content-Type'] = 'application/json; charset=utf-8'
-        respuesta_ok.headers['Access-Control-Allow-Origin'] = 'https://feelist-5d2ltpug5-kerus-projects-11fb7bb5.vercel.app'
-        return respuesta_ok
+    except Exception as e:
+        print("Error interno:", str(e))
+        return jsonify({"error": "Error interno del servidor"}), 500
 
-    except Exception as error:
-        print("Error interno:", error)
-        respuesta_error = make_response(json.dumps({"error": "Error interno del servidor"}), 500)
-        respuesta_error.headers['Access-Control-Allow-Origin'] = 'https://feelist-5d2ltpug5-kerus-projects-11fb7bb5.vercel.app'
-        return respuesta_error
-
-# Iniciar servidor si se ejecuta localmente
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=True)
+
