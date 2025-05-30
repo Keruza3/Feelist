@@ -18,12 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ text: mensajeUsuario })
       });
 
+      if(!respuesta.ok) {
+        trow new error(`Error el servidor: ${mensajeUsuario}`);
+      
       const datos = await respuesta.json();
       const { mood, quote, tracks } = datos;
 
-      if (!tracks || !Array.isArray(tracks)) {
-        contenedorRespuesta.innerText = "Monday se rompió emocionalmente. Intentalo de nuevo.";
-        return;
+      // Verificamos que tracks exista y sea un array
+      if (!Array.isArray(tracks)) {
+        throw new Error("La respuesta no contiene una lista válida de canciones.");
       }
 
       contenedorRespuesta.innerHTML = `
@@ -42,9 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
           </ul>
         </div>
       `;
+
     } catch (error) {
       contenedorRespuesta.innerText = "Error existencial. Monday no puede ayudarte ahora.";
-      console.error(error);
+      console.error("Error detectado en el cliente:", error);
     }
 
     campoTexto.value = '';
