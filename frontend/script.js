@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if(!respuesta.ok) {
-        trow new error(`Error el servidor: ${mensajeUsuario}`);
-      
+        throw new Error(`Error el servidor: ${mensajeUsuario}`);
+      }
+
       const datos = await respuesta.json();
       const { mood, quote, tracks } = datos;
 
